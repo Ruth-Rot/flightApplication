@@ -1,43 +1,56 @@
 package com.example.example.viewmodles
 
-import com.example.example.model.NoteItem
+import com.example.example.model.OurModel
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
 import kotlin.collections.ArrayList
 
-class NoteViewModel:ViewModel(),Observable {
-    val isStringEmpty = MutableLiveData<Boolean>()
+class NoteViewModel(model:OurModel):ViewModel(),Observable {
+    private val isSocket = MutableLiveData<Boolean>()
     @Bindable
     val inputPort = MutableLiveData<String>()
     @Bindable
     val inputIp = MutableLiveData<String>()
-    val list = MutableLiveData<ArrayList<NoteItem>>()
-    private val arraylst = ArrayList<NoteItem>()
+    @Bindable
+    val submit = MutableLiveData<String>()
+
+    private val list = MutableLiveData<ArrayList<OurModel>>()
+    private val arraylist = ArrayList<OurModel>()
+    var model:OurModel = model
+
 
     init {
-        isStringEmpty.value = false
-
+        isSocket.value = false
+        submit.value="Submit"
     }
-    fun connectFg() {
+
+    fun writeThrottle(value :Float){
+        model.updateThrottle(value)
+    }
+    fun writeRudder(value: Float){
+        model.updateRudder(value)
+    }
+ fun connectFg() {
         val ip = inputIp.value!!
         val port = inputPort.value!!
-        if (ip.isBlank() || port.isBlank()) {
-            isStringEmpty.value = true
-        } else {
-            println("connect")
 
-            inputIp.value = " "
-            inputPort.value = " "
-            var model = NoteItem(ip,port)
-            arraylst.add(model)
-            list.value = arraylst
+     if (!ip.isBlank() && !port.isBlank()) {
+         submit.value = "Connect"
+         isSocket.value = true
 
+         arraylist.add(model!!)
+            list.value = arraylist
             //connect to the socket
-            model.openSock()
-
+            model!!.openSock(ip,port)
+   }
+   }
+    fun closeFg(){
+        if(isSocket.value == true){
+            model!!.closeSock()
+            submit.value = "Submit"
+            isSocket.value = false
         }
 
     }
