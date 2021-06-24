@@ -22,8 +22,22 @@ When the app is opened the Main screen is showen.
 The user needs to insert an IP address and a port number (the same number we defined in the FlightGear) then press the submit button.
 in the FlightGear we need to press the autostart to start the engine and then we could start controling our plane.
 
+# code design and architechture
+
+We used the MVVM architechture in oreder to build our project.
+the View part is the xml file that has the Visibility control, it present the features of the application to the user.
+the moment the user moves or clicks any of the tools in the screen the View send a notification to the View Model.
+The ViewModel holds a model field. when he gets a notification that the view send he uses the matching method in the model.
+the Model implement the wanted action that we want to do in each occasion.
+
 # UML chart:
 
 Press here to see the uml: 
 
-# Video 
+# Explanation Video
+
+press here to watch our explanation videw: 
+
+# Collaborators
+
+This program was developed by Ruth Lofsky and Shaked Arel.
