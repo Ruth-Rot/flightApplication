@@ -32,7 +32,7 @@ the Model implement the wanted action that we want to do in each occasion.
 
 # UML chart:
 
-Press here to see the uml: 
+Press [here](https://github.com/Ruth-Rot/flightApplication/blob/master/uml.png) to see the uml diagram
 
 # Explanation Video
 
